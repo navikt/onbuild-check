@@ -1,0 +1,21 @@
+name: "ONBUILD check"
+description: "Check if the base image(s) contain any Docker ONBUILD instructions"
+inputs:
+  docker_context:
+    description: "Docker build's context is the set of files located in the specified PATH or URL (default Git context)"
+    required: true
+    default: "."
+  dockerfile:
+    description: "Path to the Dockerfile. (default {docker_context}/Dockerfile)"
+    required: true
+    default: "Dockerfile"
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+    - name: Run check
+      id: run-check
+      shell: bash
+      run: |
+        ./dostuff.sh
+    
