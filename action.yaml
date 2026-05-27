@@ -1,12 +1,8 @@
 name: "ONBUILD check"
-description: "Check if the base image(s) contain any Docker ONBUILD instructions"
+description: "Check (and fail) if any of the base imagees contain Docker ONBUILD instructions (which is a potential supply chain attack vector)"
 inputs:
-  docker_context:
-    description: "Docker build's context is the set of files located in the specified PATH or URL (default Git context)"
-    required: true
-    default: "."
   dockerfile:
-    description: "Path to the Dockerfile. (default {docker_context}/Dockerfile)"
+    description: "Path to the Dockerfile. (default ./Dockerfile)"
     required: true
     default: "Dockerfile"
 runs:
@@ -18,4 +14,6 @@ runs:
       shell: bash
       run: |
         ./dostuff.sh
+      env:
+        DOCKERFILE: ${{ github.event.inputs.dockerfile }}
     
