@@ -50,7 +50,7 @@ jobs:
           -H "Authorization: Bearer ${GITHUB_TOKEN}" \
           -H "X-GitHub-Api-Version: 2026-03-10" \
           https://api.github.com/repos/${GITHUB_REPOSITORY}/releases \
-          -d '{"tag_name":"v$VERSION","target_commitish":"main","name":"v$VERSION","body":"Version $VERSION","draft":false,"prerelease":false,"generate_release_notes":false}'
+          -d "{\"tag_name\":\"v${VERSION}\",\"target_commitish\":\"main\",\"name\":\"v${VERSION}\",\"body\":\"Version ${VERSION}\",\"draft\":false,\"prerelease\":false,\"generate_release_notes\":false}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VERSION: ${{ needs.set-version.outputs.version }}
