@@ -36,5 +36,5 @@ runs:
 
         echo "All Good! 😎"
       env:
-        DOCKERFILE: ${{ github.event.inputs.dockerfile }}
+        DOCKERFILE: ${{ inputs.dockerfile }}
     
