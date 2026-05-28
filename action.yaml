@@ -5,6 +5,10 @@ inputs:
     description: "Path to the Dockerfile. (default ./Dockerfile)"
     required: true
     default: "Dockerfile"
+  mode:
+    description: "'audit' or 'enforce'. Should execution halt if ONBUILDs are found, or do we just log it?"
+    required: false
+    default: enforce
 runs:
   using: "composite"
   steps:
@@ -25,16 +29,19 @@ runs:
         fi
 
         for img in $images; do
-            echo "Pulling and checking $img"
-            docker pull $img
-            onbuilds=$(docker inspect $img | jq -r '.[].Config.OnBuild | length')
-            if (( onbuilds != 0 )); then
-                echo "$img has ONBUILDs, and that's probably not a good thing"
-                exit 1
+          echo "Pulling and checking $img"
+          docker pull $img
+          onbuilds=$(docker inspect $img | jq -r '.[].Config.OnBuild | length')
+          if (( onbuilds != 0 )); then
+            echo "$img has ONBUILDs, and that's probably not a good thing"
+            if [[ mode == "enforce" ]]; then                 
+              exit 1
             fi
+          else
+            echo "All Good! 😎"
+          fi
         done
-
-        echo "All Good! 😎"
       env:
         DOCKERFILE: ${{ inputs.dockerfile }}
+        MODE: ${{ inputs.mode }}
     
