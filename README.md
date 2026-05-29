@@ -18,9 +18,9 @@ steps:
 ```
 
 ```
-mode: `enforce`(default, exit with error if ONBUILDs are found) or `audit` (just log it)
+mode: 'enforce'(default, exit with error if ONBUILDs are found) or 'audit' (just log it)
 
-dockerfile: (path to the Dockerfile to check, default is `./Dockerfile`)
+dockerfile: (path to the Dockerfile to check, default is './Dockerfile')
 ```
 
 Releases are immutable.
