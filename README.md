@@ -4,6 +4,27 @@ The Docker `ONBUILD` directive is a potential vector for supply chain attacks si
 
 This action checks whether `ONBUILD` is present in any of the images referenced by a `FROM` directive.
 
+### Usage
+
+In your workflow yaml:
+
+```yaml
+steps:
+  - name: Run onbuild detector action
+    uses: navikt/onbuild-check@version
+    with:
+      mode: enforce
+      dockerfile: /path/to/Dockerfile
+```
+
+```
+mode: `enforce`(default, exit with error if ONBUILDs are found) or `audit` (just log it)
+
+dockerfile: (path to the Dockerfile to check, default is `./Dockerfile`)
+```
+
+Releases are immutable.
+
 ### Questions ❓
 
 Contact us at [#appsec](https://nav-it.slack.com/archives/C06P91VN27M) on Slack
