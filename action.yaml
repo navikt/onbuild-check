@@ -38,7 +38,7 @@ runs:
               exit 1
             fi
           else
-            echo "All Good! 😎"
+            echo "All Good on $img! 😎"
           fi
         done
       env:
