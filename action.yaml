@@ -29,6 +29,7 @@ runs:
         fi
 
         for img in $images; do
+          [ "${img//[A-Za-z0-9\.\/_:@-]}" ] && echo "Detected invalid chars in image name: $img" && exit 1
           echo "Pulling and checking $img"
           docker pull $img
           onbuilds=$(docker inspect $img | jq -r '.[].Config.OnBuild | length')
