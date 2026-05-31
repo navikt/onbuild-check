@@ -4,7 +4,7 @@ The Docker `ONBUILD` directive is a potential vector for supply chain attacks si
 
 This action checks whether `ONBUILD` is present in any of the images referenced by a `FROM` directive.
 
-Inspired by [this][https://www.o3c.no/knowledge/unmasking-the-docker-onbuild-supply-chain-attack-vector] article.
+Inspired by [this](https://www.o3c.no/knowledge/unmasking-the-docker-onbuild-supply-chain-attack-vector) article.
 
 ### Usage
 
